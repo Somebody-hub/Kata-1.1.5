@@ -1,8 +1,10 @@
 package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.dao.UserDao;
+import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.service.UserServiceImpl;
 import jm.task.core.jdbc.util.Util;
 import java.util.List;
 
@@ -35,18 +37,20 @@ public class Main {
     }
 */
     public static void main(String[] args) {
-        UserDao userDao = new UserDaoJDBCImpl();
-        userDao.createUsersTable();
+        UserServiceImpl userServ = new UserServiceImpl(new UserDaoHibernateImpl());
+        //Исправил Dao на Service
+
+        userServ.createUsersTable();
         for (int i = 0; i < 4; i++){
-            userDao.saveUser("Name" + i, "LastName" + i, (byte) (20 + i * 5));
+            userServ.saveUser("Name" + i, "LastName" + i, (byte) (20 + i * 5));
             System.out.println("User с именем - " + "Name" + i + " добавлен в базу данных");
         }
 
-        userDao.removeUserById(1);
-        List<User> usList = userDao.getAllUsers();
+        userServ.removeUserById(1);
+        List<User> usList = userServ.getAllUsers();
         System.out.println(usList);
-        userDao.cleanUsersTable();
-        userDao.dropUsersTable();
+        userServ.cleanUsersTable();
+        userServ.dropUsersTable();
         Util.closeConnection();
     }
 
