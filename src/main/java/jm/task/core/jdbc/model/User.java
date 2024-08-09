@@ -1,24 +1,29 @@
 package jm.task.core.jdbc.model;
 
-import org.hibernate.annotations.Entity;
+import javax.persistence.Column;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Entity
-@Table(name = "tableUsers", schema = "katapp114")
+@Table(name = "tableUsers")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", length = 30, nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "lastName", length = 30, nullable = false)
+    @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "age", nullable = false)
+    @Column(name = "age")
     private Byte age;
 
     public User() {
@@ -73,3 +78,4 @@ public class User {
                 '}';
     }
 }
+

@@ -18,19 +18,17 @@ public class Main {
         UserService userServ = new UserServiceImpl(ud);
         //Исправил Dao на Service
 
-        //Util.makeConnectionJDBC();
-        //userServ.createUsersTable();
 
+        userServ.createUsersTable();
         for (int i = 0; i < 4; i++){
             userServ.saveUser("Name" + i, "LastName" + i, (byte) (20 + i * 5));
             System.out.println("User с именем - " + "Name" + i + " добавлен в базу данных");
         }
-
         userServ.removeUserById(1);
-        //List<User> usList = userServ.getAllUsers();
-        //System.out.println(usList);
+        List<User> usList = userServ.getAllUsers();
+        System.out.println(usList);
         userServ.cleanUsersTable();
-        //userServ.dropUsersTable();
+        userServ.dropUsersTable();
         Util.closeConnection();
     }
 

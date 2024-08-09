@@ -11,15 +11,15 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     public UserServiceImpl() {
-        this.userDao = new UserDaoJDBCImpl();
+        this.userDao = new UserDaoHibernateImpl();
     }
 
     public UserServiceImpl(UserDao userDao) {
-        if (userDao instanceof UserDaoHibernateImpl) {
-            this.userDao = new UserDaoHibernateImpl();
-        }
         if (userDao instanceof UserDaoJDBCImpl) {
             this.userDao = new UserDaoJDBCImpl();
+        }
+        if (userDao instanceof UserDaoHibernateImpl) {
+            this.userDao = new UserDaoHibernateImpl();
         }
     }
 
