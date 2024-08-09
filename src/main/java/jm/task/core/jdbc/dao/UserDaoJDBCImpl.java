@@ -13,11 +13,10 @@ import java.util.List;
 
 
 public class UserDaoJDBCImpl implements UserDao {
-    private final Connection connection = Util.getJDBCConnection();
+    private final Connection connection = Util.getConnection();
+
     public UserDaoJDBCImpl() {
-
     }
-
     public void createUsersTable() {
         String sqlRequest = "CREATE TABLE IF NOT EXISTS tableUsers (" +
                 "id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT," +
